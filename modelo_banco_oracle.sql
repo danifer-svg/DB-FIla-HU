@@ -7,6 +7,7 @@ CREATE TABLE Solicitacoes (
     situacao_id NUMBER,         -- FK para Situacoes
     sigtap_id NUMBER,           -- FK para SIGTAP
     procedimento VARCHAR2(255),
+    swalis_id NUMBER,           -- FK para SWALIS
     data_solicitacao DATE,
     tipo_leito_id NUMBER,       -- FK para TiposLeito
     especialidade_id NUMBER,    -- FK para Especialidades
@@ -21,6 +22,7 @@ CREATE TABLE Solicitacoes (
     CONSTRAINT fk_tipo_solicitacao FOREIGN KEY (tipo_solicitacao_id) REFERENCES TiposSolicitacao(id),
     CONSTRAINT fk_situacao FOREIGN KEY (situacao_id) REFERENCES Situacoes(id),
     CONSTRAINT fk_sigtap FOREIGN KEY (sigtap_id) REFERENCES SIGTAP(id),
+    CONSTRAINT fk_swalis FOREIGN KEY (swalis_id) REFERENCES Swalis(id)
     CONSTRAINT fk_tipo_leito FOREIGN KEY (tipo_leito_id) REFERENCES TiposLeito(id),
     CONSTRAINT fk_especialidade FOREIGN KEY (especialidade_id) REFERENCES Especialidades(id),
     CONSTRAINT fk_cid FOREIGN KEY (cid_id) REFERENCES CID(id),
@@ -36,15 +38,8 @@ CREATE TABLE Usuarios (
     data_nascimento DATE,
     telefone VARCHAR2(20),
     endereco VARCHAR2(255),
-    municipio_residencia_id NUMBER, -- FK para Municipios
-    grupo_sus_id NUMBER,            -- FK para GrupoSUS
-    subgrupo_sus_id NUMBER,         -- FK para SubgrupoSUS
-    forma_sus_id NUMBER,            -- FK para FormaSUS
     gestante CHAR(1) CHECK (gestante IN ('S','N')),
     CONSTRAINT fk_municipio_residencia FOREIGN KEY (municipio_residencia_id) REFERENCES Municipios(id),
-    CONSTRAINT fk_grupo_sus FOREIGN KEY (grupo_sus_id) REFERENCES GrupoSUS(id),
-    CONSTRAINT fk_subgrupo_sus FOREIGN KEY (subgrupo_sus_id) REFERENCES SubgrupoSUS(id),
-    CONSTRAINT fk_forma_sus FOREIGN KEY (forma_sus_id) REFERENCES FormaSUS(id)
 );
 
 -- 3. Tabela de Estabelecimentos - Pode ser Solicitante ou Realizador
@@ -92,12 +87,20 @@ CREATE TABLE Agendamentos (
 CREATE TABLE Swalis (
     id NUMBER PRIMARY KEY,
     cod_swalis VARCHAR2(50),
-    nome VARCHAR2(255)
+    nome VARCHAR2(255),
+    CONSTRAINT fk_cod_swalis FOREIGN KEY (cod_swalis) REFERENCES CodSwalis(id),
+    CONSTRAINT fk_nome FOREIGN KEY (nome) REFERENCES NomeSwalis(id)
 );
 
 -- 9. Tabela SIGTAP - Referência de procedimentos
 CREATE TABLE SIGTAP (
     id NUMBER PRIMARY KEY,
     codigo VARCHAR2(50),
-    nome VARCHAR2(255)
+    nome VARCHAR2(255),
+    grupo_sus_id NUMBER,            -- FK para GrupoSUS
+    subgrupo_sus_id NUMBER,         -- FK para SubgrupoSUS
+    forma_sus_id NUMBER,            -- FK para FormaSUS
+    CONSTRAINT fk_grupo_sus FOREIGN KEY (grupo_sus_id) REFERENCES GrupoSUS(id),
+    CONSTRAINT fk_subgrupo_sus FOREIGN KEY (subgrupo_sus_id) REFERENCES SubgrupoSUS(id),
+    CONSTRAINT fk_forma_sus FOREIGN KEY (forma_sus_id) REFERENCES FormaSUS(id)
 );
