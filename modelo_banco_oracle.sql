@@ -1,3 +1,4 @@
+-- Construção da arquitetura do Banco de Consultas do HU.
 
 -- 1. Tabela de Solicitações - Armazena os dados centrais de cada pedido no sistema
 CREATE TABLE Solicitacoes (
