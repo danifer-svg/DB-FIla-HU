@@ -2,8 +2,8 @@
 
 -- 1. Tabela de Solicitações - Armazena os dados centrais de cada pedido no sistema
 CREATE TABLE Solicitacoes (
-    id NUMBER PRIMARY KEY,  -- Identificador único da solicitação
-    usuario_id NUMBER,      -- FK para tabela Usuarios
+    id NUMBER PRIMARY KEY,      -- Identificador único da solicitação
+    usuario_id NUMBER,          -- FK para tabela Usuarios
     tipo_solicitacao_id NUMBER, -- FK para TiposSolicitacao
     situacao_id NUMBER,         -- FK para Situacoes
     sigtap_id NUMBER,           -- FK para SIGTAP
@@ -87,8 +87,8 @@ CREATE TABLE Agendamentos (
 -- 8. Tabela Swalis - Armazena código e nome do SWALIS
 CREATE TABLE Swalis (
     id NUMBER PRIMARY KEY,
-    cod_swalis VARCHAR2(50),
-    nome VARCHAR2(255),
+    cod_swalis VARCHAR2(50),    -- FK para CodSwalis
+    nome VARCHAR2(255),         -- FK para NomeSwalis
     CONSTRAINT fk_cod_swalis FOREIGN KEY (cod_swalis) REFERENCES CodSwalis(id),
     CONSTRAINT fk_nome FOREIGN KEY (nome) REFERENCES NomeSwalis(id)
 );
