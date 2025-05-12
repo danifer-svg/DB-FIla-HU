@@ -23,7 +23,7 @@ CREATE TABLE Solicitacoes (
     CONSTRAINT fk_tipo_solicitacao FOREIGN KEY (tipo_solicitacao_id) REFERENCES TiposSolicitacao(id),
     CONSTRAINT fk_situacao FOREIGN KEY (situacao_id) REFERENCES Situacoes(id),
     CONSTRAINT fk_sigtap FOREIGN KEY (sigtap_id) REFERENCES SIGTAP(id),
-    CONSTRAINT fk_swalis FOREIGN KEY (swalis_id) REFERENCES Swalis(id)
+    CONSTRAINT fk_swalis FOREIGN KEY (swalis_id) REFERENCES Swalis(id),
     CONSTRAINT fk_tipo_leito FOREIGN KEY (tipo_leito_id) REFERENCES TiposLeito(id),
     CONSTRAINT fk_especialidade FOREIGN KEY (especialidade_id) REFERENCES Especialidades(id),
     CONSTRAINT fk_cid FOREIGN KEY (cid_id) REFERENCES CID(id),
@@ -87,10 +87,8 @@ CREATE TABLE Agendamentos (
 -- 8. Tabela Swalis - Armazena código e nome do SWALIS
 CREATE TABLE Swalis (
     id NUMBER PRIMARY KEY,
-    cod_swalis VARCHAR2(50),    -- FK para CodSwalis
-    nome VARCHAR2(255),         -- FK para NomeSwalis
-    CONSTRAINT fk_cod_swalis FOREIGN KEY (cod_swalis) REFERENCES CodSwalis(id),
-    CONSTRAINT fk_nome FOREIGN KEY (nome) REFERENCES NomeSwalis(id)
+    cod_swalis VARCHAR2(50),
+    nome VARCHAR2(255)
 );
 
 -- 9. Tabela SIGTAP - Referência de procedimentos
